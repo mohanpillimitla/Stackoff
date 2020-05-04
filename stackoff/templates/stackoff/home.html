@@ -1,0 +1,255 @@
+{% extends 'stackoff/base.html' %}
+
+{% block content %}
+<div style="display:grid;place-items:center;">
+
+<form method="get" action='hello/'>
+  {{form}}
+  <input type="submit" value='run'>
+
+</form>
+</div>
+
+
+
+<div style="display:grid;place-items:center;"><input type="button" value="getquery" onClick=hello();>
+
+    
+</div>
+
+
+
+
+  <div style="margin-bottom:2em;display:grid;place-items:center;">
+
+
+
+<label for="id_page">Page:</label><input type="number" name="page" id="id_page">
+<label for="id_pagesize">Pagesize:</label><input type="number" name="pagesize" required="" id="id_pagesize">
+<label for="id_fromdate">Fromdate:</label><input type="text" name="fromdate" class="datepicker" required="" id="id_fromdate">
+<label for="id_todate">Todate:</label><input type="text" name="todate" class="datepicker" required="" id="id_todate">
+<label for="id_order">Order:</label><select name="order" id="id_order">
+  <option value="asc">asc</option>
+
+  <option value="dsc">dsc</option>
+
+</select>
+<label for="id_min_">Min :</label><input type="text" name="min_" class="datepicker" required="" id="id_min_">
+<label for="id_max_">Max :</label><input type="text" name="max_" class="datepicker" required="" id="id_max_">
+<label for="id_sort">Sort:</label><select name="sort" id="id_sort">
+  <option value="activity">activity</option>
+
+  <option value="votes">votes</option>
+
+  <option value="creation">creation</option>
+
+  <option value="hot">hot</option>
+
+  <option value="week">week</option>
+
+  <option value="month">month</option>
+
+</select>
+<label for="id_tagged">Tagged:</label><input type="text" name="tagged" required="" id="id_tagged">
+
+
+
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+
+
+<script>
+  function hello(){
+    var x,y;
+   $(function(){
+
+
+      a=$('#id_todate').val()
+      x=new Date(a)/1000
+      $('#id_todate').val(x);
+
+
+      a=$('#id_fromdate').val()
+      x=new Date(a)/1000
+      $('#id_fromdate').val(x);
+
+
+
+
+      
+
+      
+
+
+  a=$('#id_min_').val()
+      x=new Date(a)/1000
+      $('#id_min_').val(x);
+
+       a=$('#id_max_').val()
+      x=new Date(a)/1000
+      $('#id_max_').val(x);
+
+
+
+      if ($('#id_fromdate').val()=="NaN")
+{
+    $('#id_fromdate').val('')
+    
+}
+  if ($('#id_todate').val()=="NaN")
+{
+    $('#id_todate').val('')
+    
+}
+   if ($('#id_max_').val()=="NaN")
+{
+    $('#id_max_').val('')
+    
+}
+if ($('#id_min_').val()=="NaN")
+{
+    $('#id_min_').val('')
+    
+}
+
+
+
+
+
+
+
+
+
+
+   });
+  
+
+  
+
+  
+
+
+
+
+
+
+   
+   query='https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&site=stackoverflow';
+   a=query.split('?');
+   x=a[0]+'?';
+   y='site=stackoverflow';
+   if(document.getElementById('id_page').value!='')
+   {
+    x=x+'page='+document.getElementById('id_page').value+'&';
+   } 
+    if(document.getElementById('id_pagesize').value!='')
+   {
+    x=x+'pagesize='+document.getElementById('id_pagesize').value+'&';
+   } 
+
+    if(document.getElementById('id_fromdate').value!='')
+   {
+    x=x+'fromdate='+document.getElementById('id_fromdate').value+'&';
+   }
+
+
+    if(document.getElementById('id_todate').value!='')
+   {
+    x=x+'todate='+document.getElementById('id_todate').value+'&';
+   } 
+   if(document.getElementById('id_order').value!='')
+   {
+    x=x+'order='+document.getElementById('id_order').value+'&';
+   } 
+
+  
+
+  
+
+    if(document.getElementById('id_min_').value!='')
+   {
+    x=x+'min_='+document.getElementById('id_min_').value+'&';
+   } 
+
+    if(document.getElementById('id_max_').value!='')
+   {
+    x=x+'max_='+document.getElementById('id_max_').value+'&';
+   } 
+
+if(document.getElementById('id_sort').value!='')
+   {
+    x=x+'sort='+document.getElementById('id_sort').value+'&';
+   } 
+
+  
+
+
+    if(document.getElementById('id_tagged').value!='')
+   {
+    x=x+'tagged='+document.getElementById('id_tagged').value+'&';
+   } 
+
+  document.getElementById('id_query').value=x+y
+
+
+
+
+
+
+
+  }
+</script>
+<script>
+  $(function(){
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+});
+
+
+
+
+
+
+</script>
+{% endblock %}
+
